@@ -1,0 +1,135 @@
+<?php
+
+namespace CodePub\Http\Controllers;
+
+use CodePub\Http\Requests\BookRequest;
+use CodePub\Repositories\BookRepository;
+use Illuminate\Http\Request;
+use CodePub\Models\Book;
+use CodePub\Criteria\FindByTitleCriteria;
+
+class BooksController extends Controller
+{
+
+    private $repository;
+
+    public function __construct(BookRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+//        $search = $request->get('search');
+//        $this->repository->pushCriteria(new FindByTitleCriteria($search));
+
+        $books = $this->repository->orderBy('id')->paginate(5);
+        return view('books.index', compact('books'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('books.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(BookRequest $request)
+    {
+        dd("Estamos aqui?");
+        $this->repository->create($request->all());
+        $url = $request->get('redirect_to', route('books.index'));
+        $request->session()->flash('message', 'Livro cadastrado com sucesso!');
+        return redirect()->to($url);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $book = $this->repository->find($id);
+        return view('books.edit', compact('book'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(BookRequest $request, $id)
+    {
+        if(!($book = Book::query()->find($id))){
+            throw new ModelNotFoundException('Livro não encontrado ...');
+        }
+
+        $login = \Auth::user()->id;
+
+        if ($login == $book->author_id){
+            $this->repository->update($request->all(), $id);
+            $url = $request->get('redirect_to', route('books.index'));
+            $request->session()->flash('message', 'Livro alterado com sucesso!');
+            return redirect()->to($url);
+
+        }else{
+            $url = $request->get('redirect_to', route('books.index'));
+            $request->session()->flash('message', 'Você não tem permissão para alterar este livro!');
+            return redirect()->to($url);
+        }
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, Book $book)
+    {
+        $login = \Auth::user()->id;
+        $url = $request->get('redirect_to', route('books.index'));
+
+        if ($login == $book->author_id) {
+            $book->delete();
+            \Session::flash('message', 'Livro excluído com sucesso!');
+            return redirect()->to($url);
+        }else{
+
+            \Session::flash('message', 'Somente o autor tem permissão para excluir este livro!');
+            return redirect()->to($url);
+        }
+    }
+}
