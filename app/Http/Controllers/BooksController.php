@@ -4,6 +4,7 @@ namespace CodePub\Http\Controllers;
 
 use CodePub\Http\Requests\BookRequest;
 use CodePub\Repositories\BookRepository;
+use CodePub\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use CodePub\Models\Book;
 use CodePub\Criteria\FindByTitleCriteria;
@@ -13,9 +14,12 @@ class BooksController extends Controller
 
     private $repository;
 
-    public function __construct(BookRepository $repository)
+    private $categoryRepository;
+
+    public function __construct(BookRepository $repository, CategoryRepository $categoryRepository)
     {
         $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
     }
 
 
@@ -41,7 +45,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $categories = $this->categoryRepository->orderBy('name')->lists('name', 'id');
+        return view('books.create', compact('categories'));
     }
 
     /**
@@ -52,8 +57,10 @@ class BooksController extends Controller
      */
     public function store(BookRequest $request)
     {
-        dd("Estamos aqui?");
-        $this->repository->create($request->all());
+        $data = $request->all();
+        $data['author_id'] = \Auth::user()->id;
+        $this->repository->create($data);
+
         $url = $request->get('redirect_to', route('books.index'));
         $request->session()->flash('message', 'Livro cadastrado com sucesso!');
         return redirect()->to($url);
@@ -78,8 +85,9 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
+        $categories = $this->categoryRepository->orderBy('name')->lists('name', 'id');
         $book = $this->repository->find($id);
-        return view('books.edit', compact('book'));
+        return view('books.edit', compact('book','categories' ));
     }
 
     /**
@@ -91,6 +99,7 @@ class BooksController extends Controller
      */
     public function update(BookRequest $request, $id)
     {
+
         if(!($book = Book::query()->find($id))){
             throw new ModelNotFoundException('Livro não encontrado ...');
         }

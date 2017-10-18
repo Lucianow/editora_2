@@ -9,7 +9,7 @@
         <div class="row">
             <h4>Editar Categoria</h4>
 
-            {{  Form::model($category,['route'=> ['categories.update','category' => $category->id], 'class' => 'form', 'method' =>'PUT'])  }}
+            {!! Form::model($category,['route'=> ['categories.update','category' => $category->id], 'class' => 'form', 'method' =>'PUT'])   !!}
 
             @include('categories._form')
 
@@ -17,7 +17,7 @@
                 {!! Button::primary('Salvar Alteração')->submit() !!}
             {!! Html::closeFormGroup() !!}
 
-            {{  Form::close()  }}
+            {!! Form::close()  !!}
 
         </div>
     </div>

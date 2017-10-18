@@ -4,12 +4,15 @@ namespace CodePub\Models;
 
 use CodePub\Models\User;
 use Bootstrapper\Interfaces\TableInterface;
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class Book extends Model implements TableInterface
 {
     use Notifiable;
+
+    use FormAccessible;
 
     protected $fillable = [
         'title',
@@ -18,10 +21,22 @@ class Book extends Model implements TableInterface
         'author_id',
     ];
 
+    //Relacionamento usuário com livro
     public function author(){
         return $this->belongsTo(User::class);
     }
 
+    //Relacionamento livro com categoria
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
+
+    //Para salvar categorias em livro
+    public function formCategoriesAttribute(){
+        return $this->categories->pluck('id')->all();
+    }
+
+    //Headers da tabela index
     public function getTableHeaders()
     {
         return ['#', 'Título', 'Autor', 'Preço'];
@@ -30,6 +45,7 @@ class Book extends Model implements TableInterface
     /**
      * @param string $header
      * @return mixed
+     * retorno de livros para popular tabela em index
      */
     public function getValueForHeader($header)
     {

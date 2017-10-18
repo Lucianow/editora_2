@@ -14,10 +14,12 @@ use CodePub\Validators\CategoryValidator;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
+    use BaseRepositoryTrait;
 
     protected $fieldSearchable = [
         'name' => 'like',
     ];
+
 
     /**
      * Specify Model class name
@@ -29,7 +31,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria

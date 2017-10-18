@@ -6,6 +6,10 @@ use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property mixed id
+ * @property mixed name
+ */
 class Category extends Model implements TableInterface
 {
     use Notifiable;
@@ -14,6 +18,12 @@ class Category extends Model implements TableInterface
         'name',
     ];
 
+    //Relacionamento categoria com livro
+    public function books(){
+        return $this->belongsToMany(Book::class);
+    }
+
+    //Headers da tabela index
     public function getTableHeaders()
     {
         return ['#', 'Nome'];
@@ -22,6 +32,7 @@ class Category extends Model implements TableInterface
     /**
      * @param string $header
      * @return mixed
+     * retorno da categories para popular tabela em index
      */
     public function getValueForHeader($header)
     {
