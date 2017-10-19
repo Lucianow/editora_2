@@ -3,23 +3,21 @@
 @section('content')
     <div class="container">
 
-
-
         <div class="row">
             <h3>Nova Categoria</h3>
         </div>
 
         <div class="row">
 
-            {{  Form::open(['route'=> 'categories.store', 'class' => 'form']) }}
+            {!!   Form::open(['route'=> 'categories.store', 'class' => 'form'])  !!}
 
                 @include('categories._form')
 
                 {!! Html::openFormGroup() !!}
-                    {!! Button::primary('Criar Categoria')->submit() !!}
+                    {!! Button::primary('Inserir Categoria')->submit() !!}
                 {!! Html::closeFormGroup() !!}
 
-            {{  Form::close()  }}
+            {!!  Form::close()   !!}
         </div>
     </div>
 @endsection

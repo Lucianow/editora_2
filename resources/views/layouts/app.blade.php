@@ -37,7 +37,7 @@
                         ],
                         [
                             'link' => route('categories.create'),
-                            'title'=> 'Criar'
+                            'title'=> 'Inserir'
                         ],
                     ]
                 ],
@@ -50,7 +50,11 @@
                         ],
                         [
                             'link' => route('books.create'),
-                            'title'=> 'Criar'
+                            'title'=> 'Inserir'
+                        ],
+                        [
+                            'link' => route('trashed.books.index'),
+                            'title'=> 'Lixeira'
                         ],
                     ]
                 ]

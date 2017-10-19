@@ -4,27 +4,29 @@
 
     <div class="container">
         <div class="row">
-            <h3>Listagem de Categorias</h3>
-            {!! Button::primary('Inserir Categoria')->asLinkTo(route('categories.create')) !!}
+
+            <div class="col-md-6">
+                <h3>Listagem de Categorias</h3>
+                {!! Button::primary('Inserir Categoria')->asLinkTo(route('categories.create')) !!}
+            </div>
+
+            <div class="col-md-6">
+                {{  Form::model([], ['class' => 'form-inline text-right', 'method' =>'GET']) }}
+
+                    {!! Form::label('search', 'Pesquisar categoria :', ['class'=> 'control-label']) !!}
+                    {!! Form::text('search', null, ['class' => 'form-control']) !!}
+
+                    {!! Button::primary('Buscar')->submit() !!}
+
+                {{  Form::close()  }}
+
+            </div>
         </div>
 
-        <div class="row">
-            {{  Form::model([], ['class' => 'form-inline text-right', 'method' =>'GET']) }}
-
-            {!! Form::label('search', 'Pesquisar categoria :', ['class'=> 'control-label']) !!}
-            {!! Form::text('search', null, ['class' => 'form-control']) !!}
-
-            {!! Button::primary('Buscar')->submit() !!}
-
-            {{  Form::close()  }}
-
-            <hr>
-
-        </div>
         <div class="row">
             {{ $categories->links() }}
 
-            {!! Table::withContents($categories->items())->striped()->callback('Ações', function($field, $category){
+            {!! Table::withContents($categories->items())->condensed()->striped()->callback('Ações', function($field, $category){
                     $linkEdit = route('categories.edit',['category' => $category->id]);
                     $linkDestroy = route('categories.destroy',['category' => $category->id]);
                     $deleteForm = "delete-form-{$category->id}";

@@ -5,6 +5,7 @@ namespace CodePub\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use CodePub\Models\Book;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class BookRequest extends FormRequest
 {
@@ -42,25 +43,38 @@ class BookRequest extends FormRequest
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'price' => 'required',
-            'author' => 'required'
+            'author' => 'required',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id'
         ];
     }
 
     public function messages()
     {
-        return [
-            'required' => 'O campo :attribute é obrigatório!',
-            'max' => 'O campo :attribute não pode ter mais que 255 caracteres!'
-        ];
+        $result = [];
+        $categories = $this->get('categories', []);
+        $count = count($categories);
+        if (is_array($categories) && $count > 0){
+            foreach (range(0, $count-1) as $value){
+                $field = \Lang::get('validation.attributes.categories_*', ['num' => $value+1]);
+                $message = \Lang::get('validation.exists', ['attribute' => $field]);
+                $result["categories.$value.exists"] = $message;
+            }
+
+        }
+        return $result;
     }
 
     public function attributes()
     {
         return [
-            'title' => 'título|max:255',
-            'subtitle' => 'sub-título|max:255',
-            'price' => 'preço|numeric',
-            'author' => 'autor'
+            'title' => 'título',
+            'subtitle' => 'sub-título',
+            'price' => 'preço',
+            'author' => 'autor',
+            'categorie' => 'categoria',
+            'categories' => 'categorias',
+            'categories_*' => 'categoria :num',
         ];
     }
 }

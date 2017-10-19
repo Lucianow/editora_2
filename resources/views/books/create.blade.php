@@ -5,24 +5,19 @@
 
         <div class="row">
             <h3>Novo Livro</h3>
-
         </div>
-        <div class="row">
-            <form class="form-horizontal" method="post" action="{{ route('books.store') }}">
 
-                {{ csrf_field()}}
+        <div class="row">
+
+            {!!   Form::open(['route'=> 'books.store', 'class' => 'form'])   !!}
 
                 @include('books._form')
 
+                {!! Html::openFormGroup() !!}
+                    {!! Button::primary('Inserir Livro')->submit() !!}
+                {!! Html::closeFormGroup() !!}
 
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </div>
-
-            </form>
+            {!!   Form::close()   !!}
         </div>
     </div>
 @endsection
