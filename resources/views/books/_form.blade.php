@@ -1,57 +1,35 @@
 {{--Redirecionamento para página--}}
 {!! Form::hidden('redirect_to', URL::previous()) !!}
 
-<div class="form-group">
-    <label for="" class="col-sm-2 control-label">Título</label>
-    <div class="col-sm-10">
+{{--Template do formulário--}}
+{!!  Html::openFormGroup('title', $errors) !!}
+    {!!  Form::label('title' , 'Título' , ['class' => 'control-label'])!!}
+    {!! Form::text('title' , null, ['class' => 'form-control'])  !!}
+    {!! Form::error('title', $errors) !!}
+{!! Html::closeFormGroup() !!}
 
-        @if(isset($book))
-            <input type="text" class="form-control" name="title" value="{{ $book->title }}">
-        @else
-            <input type="text" class="form-control" name="title" placeholder="Insira um título">
-        @endif
+{!!  Html::openFormGroup('subtitle', $errors) !!}
+    {!!  Form::label('subtitle' , 'Sub-título', ['class' => 'control-label'])  !!}
+    {!! Form::text('subtitle' , null, ['class' => 'form-control'])   !!}
+    {!! Form::error('subtitle', $errors) !!}
+{!! Html::closeFormGroup() !!}
 
-        <span class="help-block">
-            <strong>{{ $errors->first('title') }}</strong>
-        </span>
-    </div>
-</div>
+{!!  Html::openFormGroup('price', $errors) !!}
+    {!!  Form::label('price' , 'Preço' , ['class' => 'control-label']) !!}
+    {!!  Form::text('price' , null, ['class' => 'form-control'])  !!}
+    {!! Form::error('price', $errors) !!}
+{!! Html::closeFormGroup() !!}
 
-<div class="form-group">
-    <label for="" class="col-sm-2 control-label">Sub-título</label>
-    <div class="col-sm-10">
+{!!  Html::openFormGroup('author_id', $errors) !!}
+    {!! Form::label('author' , 'Escrito por: '.Auth::user()->name)  !!}
+    {!! Form::hidden('author' , Auth::user()->id, ['class' => 'form-control'])   !!}
+    {!! Form::error('author', $errors) !!}
+{!! Html::closeFormGroup() !!}
 
-        @if(isset($book))
-            <input type="text" class="form-control" name="subtitle" value="{{ $book->subtitle }}">
-        @else
-            <input type="text" class="form-control" name="subtitle" placeholder="Insira um sub-título">
-        @endif
-
-        <span class="help-block">
-            <strong>{{ $errors->first('subtitle') }}</strong>
-        </span>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="" class="col-sm-2 control-label">Preço</label>
-    <div class="col-sm-10">
-
-        @if(isset($book))
-            <input type="text" class="form-control" name="price" value="{{ $book->price }}">
-        @else
-            <input type="text" class="form-control" name="price" placeholder="Insira um preço">
-        @endif
-
-        <span class="help-block">
-            <strong>{{ $errors->first('price') }}</strong>
-        </span>
-    </div>
-</div>
-
-        @if(isset($book))
-            <input type="hidden" class="form-control" name="author" value="{{ $book->author_id }}">
-        @else
-            <input type="hidden" class="form-control" name="author" value=" {{ Auth::user()->id }}">
-        @endif
+{!!  Html::openFormGroup(['categories', 'categories.*'], $errors) !!}
+    {!! Form::label('categories' , 'Categorias' , ['class' => 'control-label']) !!}
+    {!! Form::select('categories[]', $categories , null, ['class' => 'form-control', 'multiple' => true ])  !!}
+    {!! Form::error('categories', $errors) !!}
+    {!! Form::error('categories.*', $errors) !!}
+{!! Html::closeFormGroup() !!}
 

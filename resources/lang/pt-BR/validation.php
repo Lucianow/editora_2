@@ -146,6 +146,9 @@ return [
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+        'categorie'             => 'categoria',
+        'categories'            => 'categorias',
+        'categories_*'          => 'categoria :num',
     ],
 
 ];

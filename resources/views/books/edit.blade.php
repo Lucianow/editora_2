@@ -7,21 +7,19 @@
 
         </div>
         <div class="row">
-            <form class="form-horizontal" method="post" action="{{route('books.update', $book->id)}}">
+            {!!   Form::model($book,['route'=> ['books.update', 'book' => $book->id], 'class' => 'form', 'method' =>'PUT'])   !!}
 
-                {{ csrf_field()}}
+            @include('books._form')
 
-                {{ method_field('PUT') }}
+            <div class="form-group">
+                {!!  Form::hidden('autor_id' , null, ['class' => 'form-control'])   !!}
+            </div>
 
-                @include('books._form')
+            {!!  Html::openFormGroup() !!}
+                {!! Button::primary('Salvar Alteração')->submit() !!}
+            {!! Html::closeFormGroup() !!}
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-info">Salvar</button>
-                    </div>
-                </div>
-
-            </form>
+            {!!  Form::close()   !!}
         </div>
     </div>
 @endsection

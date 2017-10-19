@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use CodePub\Models\Category;
+use CodePub\Models\Book;
 
 class BooksTableSeeder extends Seeder
 {
@@ -11,6 +13,10 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\CodePub\Models\Book::class, 20)->create();
+        $categories = \CodePub\Models\Category::all();
+        factory(Book::class, 20)->create()->each(function($book) use($categories){
+            $categoriesRandom = $categories->random(4);
+            $book->categories()->sync($categoriesRandom->pluck('id')->all());
+        });
     }
 }
