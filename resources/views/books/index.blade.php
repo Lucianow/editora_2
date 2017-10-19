@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 {{  Form::model([], ['class' => 'form-inline text-right', 'method' =>'GET']) }}
 
-                    {!! Form::label('search', 'Pesquisar por título :', ['class'=> 'control-label']) !!}
+                    {!! Form::label('search', 'Pesquisar Livro :', ['class'=> 'control-label']) !!}
                     {!! Form::text('search', null, ['class' => 'form-control']) !!}
 
                     {!! Button::primary('Buscar')->submit() !!}
