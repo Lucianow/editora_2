@@ -4,6 +4,7 @@ namespace CodePub\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -13,6 +14,9 @@ use Illuminate\Notifications\Notifiable;
 class Category extends Model implements TableInterface
 {
     use Notifiable;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'name',
@@ -21,6 +25,10 @@ class Category extends Model implements TableInterface
     //Relacionamento categoria com livro
     public function books(){
         return $this->belongsToMany(Book::class);
+    }
+
+    public function getNameTrashedAttribute(){
+        return $this->trashed() ? "$this->name (Inativa)" : $this->name;
     }
 
     //Headers da tabela index

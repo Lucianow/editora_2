@@ -52,6 +52,10 @@
                             'link' => route('books.create'),
                             'title'=> 'Inserir'
                         ],
+                        [
+                            'link' => route('trashed.books.index'),
+                            'title'=> 'Lixeira'
+                        ],
                     ]
                 ]
             ]);

@@ -2,17 +2,19 @@
 
 namespace CodePub\Models;
 
-use CodePub\Models\User;
 use Bootstrapper\Interfaces\TableInterface;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Book extends Model implements TableInterface
 {
     use Notifiable;
-
     use FormAccessible;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'title',
@@ -28,7 +30,7 @@ class Book extends Model implements TableInterface
 
     //Relacionamento livro com categoria
     public function categories(){
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->withTrashed();
     }
 
     //Para salvar categorias em livro
