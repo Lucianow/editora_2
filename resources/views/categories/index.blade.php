@@ -15,7 +15,6 @@
 
                     {!! Form::label('search', 'Pesquisar categoria :', ['class'=> 'control-label']) !!}
                     {!! Form::text('search', null, ['class' => 'form-control']) !!}
-
                     {!! Button::primary('Buscar')->submit() !!}
 
                 {{  Form::close()  }}
