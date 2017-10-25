@@ -1,0 +1,15 @@
+{
+    "name": "lucianow/codeedubook",
+    "description": "",
+    "authors": [
+        {
+            "name": "Luciano Wanderley",
+            "email": "lucianowanderley.jp@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CodeEduBook\\": ""
+        }
+    }
+}
