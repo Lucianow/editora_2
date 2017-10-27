@@ -173,8 +173,9 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \Nwidart\Modules\LaravelModulesServiceProvider::class,
 
-        //Registros dos módulos
+
         \CodeEduBook\Providers\CodeEduBookServiceProvider::class,
+
 
         /*
          * Application Service Providers...

@@ -4,7 +4,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class CodeEduBookDatabaseSeeder extends Seeder
+class TesteTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class CodeEduBookDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        $this->call(TesteTableSeeder::class);
+        $this->command->info("Seeder module executada");
+        // $this->call("OthersTableSeeder");
     }
 }

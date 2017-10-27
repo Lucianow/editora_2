@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $rootUrlNamespace = '\CodeEduBook\Http\Controllers';
+    protected $rootUrlNamespace = 'CodeEduBook\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -34,8 +34,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        \Route::group(['middleware' => 'web', 'namespace' => $this->rootUrlNamespace], function()
-        {
+        \Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->rootUrlNamespace
+        ], function(){
             require __DIR__ . '/../Http/routes.php';
         });
 

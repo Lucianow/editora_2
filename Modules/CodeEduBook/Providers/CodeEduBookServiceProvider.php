@@ -32,7 +32,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->register(RouteServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
