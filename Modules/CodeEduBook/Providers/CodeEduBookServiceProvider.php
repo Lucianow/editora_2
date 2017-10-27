@@ -23,6 +23,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->publishMigrationsAndSeeders();
     }
 
     /**
@@ -84,6 +85,21 @@ class CodeEduBookServiceProvider extends ServiceProvider
         } else {
             $this->loadTranslationsFrom(__DIR__ .'/../resources/lang', 'codeedubook');
         }
+    }
+
+    public function publishMigrationsAndSeeders(){
+
+        $sourcePath = __DIR__.'/../database/migrations';
+
+        $this->publishes([
+            $sourcePath => database_path('migrations')
+        ], 'migrations');
+
+        $sourcePath = __DIR__.'/../database/seeders';
+
+        $this->publishes([
+            $sourcePath => database_path('seeds')
+        ], 'seeders');
     }
 
     /**
