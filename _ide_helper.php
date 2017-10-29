@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.31 on 2017-10-20.
+ * Generated for Laravel 5.3.31 on 2017-10-29.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -15020,6 +15020,14 @@ namespace Bootstrapper\Facades {
  
 }
 
+namespace Nwidart\Modules { 
+
+    class Module {
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -16969,6 +16977,8 @@ namespace  {
     class Table extends \Bootstrapper\Facades\Table {}
 
     class Thumbnail extends \Bootstrapper\Facades\Thumbnail {}
+
+    class Module extends \Nwidart\Modules\Module {}
  
 }
 

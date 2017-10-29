@@ -1,12 +1,14 @@
 <?php
 
-namespace CodePub\Http\Controllers;
+namespace CodeEduBook\Http\Controllers;
 
-use CodePub\Http\Requests\BookRequest;
-use CodePub\Repositories\BookRepository;
-use CodePub\Repositories\CategoryRepository;
+use CodePub\Http\Controllers\Controller;
+use CodePub\Http\Controllers\ModelNotFoundException;
+use CodeEduBook\Http\Requests\BookRequest;
+use CodeEduBook\Repositories\BookRepository;
+use CodeEduBook\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
-use CodePub\Models\Book;
+use CodeEduBook\Models\Book;
 use CodePub\Criteria\FindByTitleCriteria;
 
 class BooksController extends Controller
@@ -33,7 +35,7 @@ class BooksController extends Controller
     {
 
         $books = $this->repository->orderBy('id')->paginate(5);
-        return view('books.index', compact('books'));
+        return view('codeedubook::books.index', compact('books'));
     }
 
     /**
@@ -44,7 +46,7 @@ class BooksController extends Controller
     public function create()
     {
         $categories = $this->categoryRepository->orderBy('name')->lists('name', 'id');
-        return view('books.create', compact('categories'));
+        return view('codeedubook::books.create', compact('categories'));
     }
 
     /**
@@ -86,7 +88,7 @@ class BooksController extends Controller
         $book = $this->repository->find($id);
         $this->categoryRepository->withTrashed();
         $categories = $this->categoryRepository->orderBy('name')->listsWithMutators('name_trashed', 'id');
-        return view('books.edit', compact('book','categories' ));
+        return view('codeedubook::books.edit', compact('book','categories' ));
     }
 
     /**
