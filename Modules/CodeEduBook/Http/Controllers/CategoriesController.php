@@ -1,12 +1,13 @@
 <?php
 
-namespace CodePub\Http\Controllers;
+namespace CodeEduBook\Http\Controllers;
 
-use CodePub\Models\Category;
-use CodePub\Repositories\CategoryRepository;
+use CodeEduBook\Models\Category;
+use CodePub\Http\Controllers\Controller;
+use CodeEduBook\Repositories\CategoryRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use CodePub\Http\Requests\CategoryRequest;
+use CodeEduBook\Http\Requests\CategoryRequest;
 
 
 class CategoriesController extends Controller
@@ -27,7 +28,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = $this->repository->orderBy('id')->paginate(5);
-        return view('categories.index', compact('categories'));
+        return view('codeedubook::categories.index', compact('categories'));
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('codeedubook::categories.create');
     }
 
     /**
@@ -75,7 +76,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $category = $this->repository->find($id);
-        return view('categories.edit', compact('category'));
+        return view('codeedubook::categories.edit', compact('category'));
     }
 
     /**

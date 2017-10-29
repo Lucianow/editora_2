@@ -1,9 +1,9 @@
 <?php
 
-namespace CodePub\Http\Requests;
+namespace CodeEduBook\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use CodePub\Models\Book;
+use CodeEduBook\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 

@@ -1,8 +1,10 @@
 <?php
 
-namespace CodePub\Models;
+namespace CodeEduBook\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
+use CodeEduBook\Models\Category;
+use CodePub\Models\User;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

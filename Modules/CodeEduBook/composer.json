@@ -1,0 +1,19 @@
+{
+    "name": "lucianow/codeedubook",
+    "description": "",
+    "authors": [
+        {
+            "name": "Luciano Wanderley",
+            "email": "lucianowanderley.jp@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "~2.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CodeEduBook\\": ""
+        }
+    }
+}
