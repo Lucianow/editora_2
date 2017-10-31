@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Code Pub',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,6 +175,7 @@ return [
 
 
         \CodeEduBook\Providers\CodeEduBookServiceProvider::class,
+        \CodeEduUser\Providers\CodeEduUserServiceProvider::class,
 
 
         /*
@@ -264,6 +265,7 @@ return [
         'Thumbnail' => Bootstrapper\Facades\Thumbnail::class,
 
         'Module' => \Nwidart\Modules\Module::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
 
     ],
 

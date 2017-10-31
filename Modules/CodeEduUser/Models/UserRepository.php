@@ -1,6 +1,6 @@
 <?php
 
-namespace CodePub\Models;
+namespace CodeEduUser\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;

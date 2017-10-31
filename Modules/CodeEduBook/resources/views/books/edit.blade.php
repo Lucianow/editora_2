@@ -9,7 +9,7 @@
         <div class="row">
             {!!   Form::model($book,['route'=> ['books.update', 'book' => $book->id], 'class' => 'form', 'method' =>'PUT'])   !!}
 
-            @include('books._form')
+            @include('codeedubook::books._form')
 
             <div class="form-group">
                 {!!  Form::hidden('autor_id' , null, ['class' => 'form-control'])   !!}

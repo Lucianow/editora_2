@@ -3,7 +3,6 @@
 namespace CodeEduBook\Http\Controllers;
 
 use CodeEduBook\Models\Category;
-use CodePub\Http\Controllers\Controller;
 use CodeEduBook\Repositories\CategoryRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;

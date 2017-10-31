@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.31 on 2017-10-29.
+ * Generated for Laravel 5.3.31 on 2017-10-31.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1520,7 +1520,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \CodePub\Models\User|null 
+         * @return \CodeEduUser\Models\User|null 
          * @static 
          */ 
         public static function user()
@@ -1633,7 +1633,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \CodePub\Models\User|false 
+         * @return \CodeEduUser\Models\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1645,7 +1645,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \CodePub\Models\User|false 
+         * @return \CodeEduUser\Models\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1748,7 +1748,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \CodePub\Models\User|null 
+         * @return \CodeEduUser\Models\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1794,7 +1794,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \CodePub\Models\User 
+         * @return \CodeEduUser\Models\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1838,7 +1838,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \CodePub\Models\User 
+         * @return \CodeEduUser\Models\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -15028,6 +15028,136 @@ namespace Nwidart\Modules {
  
 }
 
+namespace Jrean\UserVerification\Facades { 
+
+    class UserVerification {
+        
+        /**
+         * Generate and save a verification token for the given user.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @return bool 
+         * @static 
+         */ 
+        public static function generate($user)
+        {
+            return \Jrean\UserVerification\UserVerification::generate($user);
+        }
+        
+        /**
+         * Send by e-mail a link containing the verification token.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return bool 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function send($user, $subject = null, $from = null, $name = null)
+        {
+            return \Jrean\UserVerification\UserVerification::send($user, $subject, $from, $name);
+        }
+        
+        /**
+         * Queue and send by e-mail a link containing the verification token.
+         *
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return bool 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendQueue($user, $subject = null, $from = null, $name = null)
+        {
+            return \Jrean\UserVerification\UserVerification::sendQueue($user, $subject, $from, $name);
+        }
+        
+        /**
+         * Queue on the given queue and send by e-mail a link containing the verification token.
+         *
+         * @param string $queue
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return bool 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendQueueOn($queue, $user, $subject = null, $from = null, $name = null)
+        {
+            return \Jrean\UserVerification\UserVerification::sendQueueOn($queue, $user, $subject, $from, $name);
+        }
+        
+        /**
+         * Send later by e-mail a link containing the verification token.
+         *
+         * @param int $seconds
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return bool 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendLater($seconds, $user, $subject = null, $from = null, $name = null)
+        {
+            return \Jrean\UserVerification\UserVerification::sendLater($seconds, $user, $subject, $from, $name);
+        }
+        
+        /**
+         * Send later on the given queue by e-mail a link containing the verification token.
+         *
+         * @param string $queue
+         * @param int $seconds
+         * @param \Illuminate\Contracts\Auth\Authenticatable $user
+         * @param string $subject
+         * @param string $from
+         * @param string $name
+         * @return bool 
+         * @throws \Jrean\UserVerification\Exceptions\ModelNotCompliantException
+         * @static 
+         */ 
+        public static function sendLaterOn($queue, $seconds, $user, $subject = null, $from = null, $name = null)
+        {
+            return \Jrean\UserVerification\UserVerification::sendLaterOn($queue, $seconds, $user, $subject, $from, $name);
+        }
+        
+        /**
+         * Set the e-mail view name.
+         *
+         * @param string $name
+         * @return \Jrean\UserVerification 
+         * @static 
+         */ 
+        public static function emailView($name)
+        {
+            return \Jrean\UserVerification\UserVerification::emailView($name);
+        }
+        
+        /**
+         * Process the user verification for the given e-mail and token.
+         *
+         * @param string $email
+         * @param string $token
+         * @param string $userTable
+         * @return void 
+         * @static 
+         */ 
+        public static function process($email, $token, $userTable)
+        {
+            \Jrean\UserVerification\UserVerification::process($email, $token, $userTable);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -16979,6 +17109,8 @@ namespace  {
     class Thumbnail extends \Bootstrapper\Facades\Thumbnail {}
 
     class Module extends \Nwidart\Modules\Module {}
+
+    class UserVerification extends \Jrean\UserVerification\Facades\UserVerification {}
  
 }
 
