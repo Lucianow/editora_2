@@ -23,6 +23,7 @@ class UserSettingRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('user');
         return [
             'password' => "required|min:6|max:16|confirmed"
 

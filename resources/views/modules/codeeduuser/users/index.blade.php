@@ -31,11 +31,14 @@
                     $deleteForm = "delete-form-{$user->id}";
                     $form = Form::open(['route'=>['codeeduuser.users.destroy', $user->id], 'method'=>'DELETE', 'id' => $deleteForm ]);
                     $deleteButton = Form::submit('Excluir',['class'=>'btn btn-link']).Form::close();
+                    $destroy = '<a title="Não é possivel excluir o próprio usuário!"><del>Excluir</del></a>';
+                    $teste = $user->id == \Auth::user()->id ? $destroy : $form.$deleteButton;
+
 
                     return 	"<ul class=\"list-inline\">".
                                 "<li>".Button::link('Editar')->asLinkTo($linkEdit)."</li>".
                                 "<li>|</li>".
-                                "<li>".$form.$deleteButton."</li>".
+                                "<li>".$teste."</li>".
                             "</ul>";
 			}) !!}
 

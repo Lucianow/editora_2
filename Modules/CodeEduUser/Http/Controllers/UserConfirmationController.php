@@ -13,7 +13,8 @@ class UserConfirmationController extends Controller
 
     private $repository;
 
-    public function __construct(UserRepository $repository) {
+    public function __construct(UserRepository $repository)
+    {
         $this->repository = $repository;
     }
 

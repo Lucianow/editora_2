@@ -4,7 +4,7 @@
 <p>Usuário: <strong>{{$user->email}}</strong></p>
 <p>
     <?php
-        $link = route('codeeduuser.email-verification.check', $user->verification_token).'?email'.urlencode($user->email);
+        $link = route('codeeduuser.email-verification.check', $user->verification_token).'?email='.urlencode($user->email);
     ?>
 
     Clique aqui para ativar: <a href="{{$link}}">{{$link}}</a>
