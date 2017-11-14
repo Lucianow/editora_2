@@ -15,6 +15,11 @@ use CodePub\Validators\UserRepositoryValidator;
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
 
+    protected $fieldSearchable = [
+        'name' => 'like',
+
+    ];
+
     public function create(array $attributes)
     {
         $attributes['password'] = User::generatePassword();

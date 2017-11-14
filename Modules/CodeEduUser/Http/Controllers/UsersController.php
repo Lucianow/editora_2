@@ -4,14 +4,19 @@ namespace CodeEduUser\Http\Controllers;
 
 use CodeEduUser\Http\Requests\UserDeleteRequest;
 use CodeEduUser\Repositories\UserRepository;
-use Illuminate\Http\Request;
 use CodeEduUser\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class UsersController extends Controller
 {
     private $repository;
 
+    /**
+     * UsersController constructor.
+     * @param UserRepository $repository
+     */
     public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
@@ -21,7 +26,8 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -32,7 +38,7 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -42,8 +48,8 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param UserRequest|Request $request
+     * @return Response
      */
     public function store(UserRequest $request)
     {
@@ -57,7 +63,7 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -68,7 +74,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      * Original ($id)
      */
     public function edit($id)
@@ -80,9 +86,9 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UserRequest|Request $request
+     * @param  int $id
+     * @return Response
      */
     public function update(UserRequest $request, $id)
     {
@@ -98,7 +104,7 @@ class UsersController extends Controller
      *
      * @param UserDeleteRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(UserDeleteRequest $request, $id)
     {

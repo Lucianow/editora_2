@@ -11,7 +11,10 @@ return [
     ],
     'user_default' => [
         'name' => env('USER_NAME', 'Administrator'),
-        'email' => env('USER_MAIL', 'admin@email.com'),
+        'email' => env('USER_EMAIL', 'admin@email.com'),
         'password' => env('USER_PASSWORD', 'secret')
+    ],
+    'acl' => [
+        'role_admin' => env('ROLE_ADMIN', 'Admin')
     ]
 ];

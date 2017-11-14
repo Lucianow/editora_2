@@ -27,7 +27,9 @@ class CreateUsersData extends Migration
      */
     public function down()
     {
+        \Schema::disableForeignKeyConstraints();
         $user = User::where('email', config('codeeduuser.user_default.email'))->first();
         $user->forceDelete();
+        \Schema::enableForeignKeyConstraints();
     }
 }

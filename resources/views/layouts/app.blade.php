@@ -58,6 +58,7 @@
                         ],
                     ]
                 ]
+
             ]);
             $logout = Navigation::links([
                 [   Auth::user()->name,
@@ -75,6 +76,7 @@
             $navbar->withContent($links)->withContent($logout);
         }
         ?>
+
 
         {!! $navbar !!}
         {!! Form::open(['url' => url('/logout'), 'id' => 'logout-form', 'style' => 'display:none']) !!}
