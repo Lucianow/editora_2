@@ -7,8 +7,13 @@ use CodeEduUser\Repositories\UserRepository;
 use CodeEduUser\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use CodeEduUser\Annotations\Mapping\Controller as ControllerAnnotation;
+use CodeEduUser\Annotations\Mapping\Action as ActionAnnotation;
 
 
+/**
+ * @ControllerAnnotation(name="users-admin", description="Administração de usuários")
+ */
 class UsersController extends Controller
 {
     private $repository;
@@ -25,7 +30,7 @@ class UsersController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @ActionAnnotation(name="list", description="Ver listagem de usuários")
      * @param Request $request
      * @return Response
      */
